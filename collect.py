@@ -127,7 +127,8 @@ def load_all_snapshots() -> list[dict]:
     return snapshots
 
 
-GCS_BUCKET = "gs://canbus-kpi-dashboard"
+INDEX_PATH = PROJECT_ROOT / "index.html"
+PAGES_URL = "https://talyizhak.github.io/canbus-kpi-dashboard/"
 
 
 def build_dashboard(snapshots: list[dict]) -> None:
@@ -136,20 +137,23 @@ def build_dashboard(snapshots: list[dict]) -> None:
     dashboard_data = json.dumps(snapshots, ensure_ascii=False)
     html = template.replace("__DASHBOARD_DATA__", dashboard_data)
     DASHBOARD_PATH.write_text(html)
+    INDEX_PATH.write_text(html)
     print(f"Dashboard updated: {DASHBOARD_PATH}")
 
 
-def upload_to_gcs() -> None:
-    """Upload dashboard.html to GCS for public sharing."""
-    result = subprocess.run(
-        ["gsutil", "cp", "-a", "public-read", str(DASHBOARD_PATH), f"{GCS_BUCKET}/index.html"],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode == 0:
-        print(f"Uploaded to: https://storage.googleapis.com/canbus-kpi-dashboard/index.html")
-    else:
-        print(f"GCS upload failed: {result.stderr}", file=sys.stderr)
+def publish() -> None:
+    """Commit updated data and dashboard, push to GitHub Pages."""
+    cmds = [
+        ["git", "-C", str(PROJECT_ROOT), "add", "-A"],
+        ["git", "-C", str(PROJECT_ROOT), "commit", "-m", f"Weekly KPI update {datetime.now(timezone.utc).strftime('%Y-%m-%d')}"],
+        ["git", "-C", str(PROJECT_ROOT), "push"],
+    ]
+    for cmd in cmds:
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0 and "nothing to commit" not in result.stdout:
+            print(f"Git error: {result.stderr}", file=sys.stderr)
+            return
+    print(f"Published to: {PAGES_URL}")
 
 
 def main():
@@ -163,7 +167,7 @@ def main():
     print(f"  {len(snapshots)} total snapshots")
 
     build_dashboard(snapshots)
-    upload_to_gcs()
+    publish()
     print("Done.")
 
 
