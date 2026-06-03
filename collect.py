@@ -133,7 +133,7 @@ INDEX_PATH = PROJECT_ROOT / "index.html"
 PAGES_URL = "https://fieldin-ops.github.io/canbus-kpi-dashboard/"
 
 
-DASHBOARD_PASSWORD = os.environ.get("KPI_DASHBOARD_PASSWORD", "fieldin2024")
+DASHBOARD_PASSWORD = os.environ.get("KPI_DASHBOARD_PASSWORD", "gceloTM6fxzXFpRf")
 
 
 def build_dashboard(snapshots: list[dict]) -> None:
