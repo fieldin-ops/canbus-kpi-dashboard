@@ -148,6 +148,9 @@ def build_dashboard(snapshots: list[dict]) -> None:
     print(f"Dashboard updated: {DASHBOARD_PATH}")
 
 
+NOTIFY_EMAIL = os.environ.get("KPI_NOTIFY_EMAIL", "tyizhak@fieldintech.com")
+
+
 def publish() -> None:
     """Commit updated data and dashboard, push to GitHub Pages."""
     cmds = [
@@ -163,6 +166,40 @@ def publish() -> None:
     print(f"Published to: {PAGES_URL}")
 
 
+def send_notification(snapshots: list[dict]) -> None:
+    """Send an email notification with a quick summary via macOS Mail."""
+    latest = snapshots[-1] if snapshots else None
+    if not latest:
+        return
+
+    s = latest["summary"]
+    date = latest["date"]
+    subject = f"CAN Bus KPI Dashboard Updated — {date}"
+    body = (
+        f"The weekly CAN Bus KPI dashboard has been updated.\n\n"
+        f"  Date:                  {date}\n"
+        f"  Companies with CAN:    {s['companies_with_canbus']} / {s['total_companies']}\n"
+        f"  Devices with CAN:      {s['total_canbus']:,} / {s['total_sml']:,}\n"
+        f"  Adoption Rate:         {s['adoption_pct']}%\n\n"
+        f"View the dashboard:\n{PAGES_URL}\n"
+    )
+
+    applescript = f'''
+    tell application "Mail"
+        set newMsg to make new outgoing message with properties {{subject:"{subject}", content:"{body}", visible:false}}
+        tell newMsg
+            make new to recipient at end of to recipients with properties {{address:"{NOTIFY_EMAIL}"}}
+        end tell
+        send newMsg
+    end tell
+    '''
+    result = subprocess.run(["osascript", "-e", applescript], capture_output=True, text=True)
+    if result.returncode == 0:
+        print(f"Notification sent to {NOTIFY_EMAIL}")
+    else:
+        print(f"Email notification failed: {result.stderr}", file=sys.stderr)
+
+
 def main():
     print("Collecting CAN Bus KPI data...")
     rows = run_query()
@@ -175,6 +212,7 @@ def main():
 
     build_dashboard(snapshots)
     publish()
+    send_notification(snapshots)
     print("Done.")
 
 
