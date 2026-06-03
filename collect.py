@@ -128,7 +128,7 @@ def load_all_snapshots() -> list[dict]:
 
 
 INDEX_PATH = PROJECT_ROOT / "index.html"
-PAGES_URL = "https://talyizhak.github.io/canbus-kpi-dashboard/"
+PAGES_URL = "https://fieldin-ops.github.io/canbus-kpi-dashboard/"
 
 
 def build_dashboard(snapshots: list[dict]) -> None:
