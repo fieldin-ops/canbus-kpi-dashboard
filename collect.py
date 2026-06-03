@@ -6,7 +6,9 @@ Runs the BigQuery query, saves a timestamped snapshot to data/snapshots/,
 and regenerates the HTML dashboard.
 """
 
+import hashlib
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -131,11 +133,16 @@ INDEX_PATH = PROJECT_ROOT / "index.html"
 PAGES_URL = "https://fieldin-ops.github.io/canbus-kpi-dashboard/"
 
 
+DASHBOARD_PASSWORD = os.environ.get("KPI_DASHBOARD_PASSWORD", "fieldin2024")
+
+
 def build_dashboard(snapshots: list[dict]) -> None:
-    """Inject snapshot data into the HTML template and write dashboard.html."""
+    """Inject snapshot data and password hash into the HTML template."""
     template = TEMPLATE_PATH.read_text()
     dashboard_data = json.dumps(snapshots, ensure_ascii=False)
+    pw_hash = hashlib.sha256(DASHBOARD_PASSWORD.encode()).hexdigest()
     html = template.replace("__DASHBOARD_DATA__", dashboard_data)
+    html = html.replace("__DASHBOARD_PASSWORD_HASH__", pw_hash)
     DASHBOARD_PATH.write_text(html)
     INDEX_PATH.write_text(html)
     print(f"Dashboard updated: {DASHBOARD_PATH}")
