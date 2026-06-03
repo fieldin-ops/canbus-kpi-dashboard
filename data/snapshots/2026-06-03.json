@@ -1,0 +1,1052 @@
+{
+  "week": "2026-W22",
+  "date": "2026-06-03",
+  "collected_at": "2026-06-03T11:48:47.167573+00:00",
+  "summary": {
+    "total_companies": 173,
+    "companies_with_canbus": 70,
+    "total_sml": 5085,
+    "total_canbus": 1040,
+    "adoption_pct": 20.45
+  },
+  "companies": [
+    {
+      "company": "OLAM AUSTRALIA",
+      "country": "Australia",
+      "sml": 451,
+      "canbus": 129
+    },
+    {
+      "company": "Farmland",
+      "country": "US",
+      "sml": 298,
+      "canbus": 112
+    },
+    {
+      "company": "Select Harvests",
+      "country": "Australia",
+      "sml": 285,
+      "canbus": 23
+    },
+    {
+      "company": "Costa",
+      "country": "Australia",
+      "sml": 236,
+      "canbus": 4
+    },
+    {
+      "company": "Stahmann Webster",
+      "country": "Australia",
+      "sml": 138,
+      "canbus": 2
+    },
+    {
+      "company": "Maberry Packing",
+      "country": "US",
+      "sml": 120,
+      "canbus": 7
+    },
+    {
+      "company": "Olam",
+      "country": "US",
+      "sml": 118,
+      "canbus": 72
+    },
+    {
+      "company": "Lange Twins",
+      "country": "US",
+      "sml": 106,
+      "canbus": 4
+    },
+    {
+      "company": "Sun Pacific",
+      "country": "US",
+      "sml": 102,
+      "canbus": 53
+    },
+    {
+      "company": "Sandridge",
+      "country": "US",
+      "sml": 100,
+      "canbus": 50
+    },
+    {
+      "company": "Deseret Farms",
+      "country": "US",
+      "sml": 96,
+      "canbus": 11
+    },
+    {
+      "company": "Aroona Farms",
+      "country": "Australia",
+      "sml": 84,
+      "canbus": 12
+    },
+    {
+      "company": "Enfield Farms",
+      "country": "US",
+      "sml": 81,
+      "canbus": 7
+    },
+    {
+      "company": "E & J Gallo",
+      "country": "US",
+      "sml": 81,
+      "canbus": 28
+    },
+    {
+      "company": "Bullseye Farming",
+      "country": "US",
+      "sml": 80,
+      "canbus": 18
+    },
+    {
+      "company": "Wilbur-Ellis",
+      "country": "US",
+      "sml": 80,
+      "canbus": 61
+    },
+    {
+      "company": "Westside Harvesting",
+      "country": "US",
+      "sml": 79,
+      "canbus": 49
+    },
+    {
+      "company": "West Ag Services",
+      "country": "US",
+      "sml": 77,
+      "canbus": 2
+    },
+    {
+      "company": "Helena Agri-Enterprises",
+      "country": "US",
+      "sml": 74,
+      "canbus": 57
+    },
+    {
+      "company": "Douglas Fruit",
+      "country": "US",
+      "sml": 71,
+      "canbus": 22
+    },
+    {
+      "company": "Ag Field Services",
+      "country": "Australia",
+      "sml": 67,
+      "canbus": 5
+    },
+    {
+      "company": "Macadamia Farm Management",
+      "country": "Australia",
+      "sml": 66,
+      "canbus": 9
+    },
+    {
+      "company": "Hop Products Australia",
+      "country": "Australia",
+      "sml": 64,
+      "canbus": 2
+    },
+    {
+      "company": "Gallo Coastal",
+      "country": "US",
+      "sml": 61,
+      "canbus": 34
+    },
+    {
+      "company": "T & P",
+      "country": "US",
+      "sml": 59,
+      "canbus": 21
+    },
+    {
+      "company": "2B Farming, Inc",
+      "country": "US",
+      "sml": 58,
+      "canbus": 32
+    },
+    {
+      "company": "KG Vineyards",
+      "country": "US",
+      "sml": 57,
+      "canbus": 5
+    },
+    {
+      "company": "Triple A",
+      "country": "US",
+      "sml": 57,
+      "canbus": 0
+    },
+    {
+      "company": "Del Mar Farms - JEM Ranches",
+      "country": "US",
+      "sml": 56,
+      "canbus": 0
+    },
+    {
+      "company": "Sunrise Sprayers",
+      "country": "US",
+      "sml": 56,
+      "canbus": 3
+    },
+    {
+      "company": "Chico Nut",
+      "country": "US",
+      "sml": 52,
+      "canbus": 0
+    },
+    {
+      "company": "California Olive Ranch",
+      "country": "US",
+      "sml": 50,
+      "canbus": 3
+    },
+    {
+      "company": "CMC Farms",
+      "country": "US",
+      "sml": 49,
+      "canbus": 12
+    },
+    {
+      "company": "GO.FARM",
+      "country": "Australia",
+      "sml": 48,
+      "canbus": 7
+    },
+    {
+      "company": "כרמל",
+      "country": "IL",
+      "sml": 47,
+      "canbus": 2
+    },
+    {
+      "company": "First Fruits Farms",
+      "country": "US",
+      "sml": 45,
+      "canbus": 0
+    },
+    {
+      "company": "Costa View Farms",
+      "country": "US",
+      "sml": 41,
+      "canbus": 2
+    },
+    {
+      "company": "Bee Sweet",
+      "country": "US",
+      "sml": 40,
+      "canbus": 3
+    },
+    {
+      "company": "Century Orchards",
+      "country": "Australia",
+      "sml": 37,
+      "canbus": 4
+    },
+    {
+      "company": "Huron Orchard Services",
+      "country": "US",
+      "sml": 35,
+      "canbus": 1
+    },
+    {
+      "company": "Pacific Farms & Orchards, INC.",
+      "country": "US",
+      "sml": 34,
+      "canbus": 1
+    },
+    {
+      "company": "AC Foods",
+      "country": "US",
+      "sml": 34,
+      "canbus": 16
+    },
+    {
+      "company": "Bays Ranch Inc",
+      "country": "US",
+      "sml": 33,
+      "canbus": 0
+    },
+    {
+      "company": "CL Macs",
+      "country": "Australia",
+      "sml": 31,
+      "canbus": 0
+    },
+    {
+      "company": "Santa Fe Farming",
+      "country": "US",
+      "sml": 31,
+      "canbus": 0
+    },
+    {
+      "company": "Kisling Farms LLC",
+      "country": "US",
+      "sml": 31,
+      "canbus": 25
+    },
+    {
+      "company": "Silverado",
+      "country": "US",
+      "sml": 29,
+      "canbus": 0
+    },
+    {
+      "company": "Ranch Management Co., LLC",
+      "country": "US",
+      "sml": 29,
+      "canbus": 0
+    },
+    {
+      "company": "South Valley Farms",
+      "country": "US",
+      "sml": 29,
+      "canbus": 29
+    },
+    {
+      "company": "Vineyard Professional Services",
+      "country": "US",
+      "sml": 29,
+      "canbus": 1
+    },
+    {
+      "company": "Taylor Harvesting LLC",
+      "country": "US",
+      "sml": 27,
+      "canbus": 3
+    },
+    {
+      "company": "Agriculture Capital",
+      "country": "Australia",
+      "sml": 26,
+      "canbus": 0
+    },
+    {
+      "company": "Zirkle Fruit. CRO",
+      "country": "US",
+      "sml": 26,
+      "canbus": 0
+    },
+    {
+      "company": "Palla Farms",
+      "country": "US",
+      "sml": 26,
+      "canbus": 5
+    },
+    {
+      "company": "Southern Hills Orchards",
+      "country": "US",
+      "sml": 25,
+      "canbus": 4
+    },
+    {
+      "company": "Sunrise Olive",
+      "country": "US",
+      "sml": 24,
+      "canbus": 0
+    },
+    {
+      "company": "Cobram Estate",
+      "country": "Australia",
+      "sml": 24,
+      "canbus": 3
+    },
+    {
+      "company": "Canal Farms",
+      "country": "US",
+      "sml": 24,
+      "canbus": 1
+    },
+    {
+      "company": "Rakkar Farms",
+      "country": "US",
+      "sml": 23,
+      "canbus": 1
+    },
+    {
+      "company": "Terra nova",
+      "country": "US",
+      "sml": 23,
+      "canbus": 0
+    },
+    {
+      "company": "Andrew Peace Wines",
+      "country": "Australia",
+      "sml": 22,
+      "canbus": 0
+    },
+    {
+      "company": "Zirkle Fruit. Royal City",
+      "country": "US",
+      "sml": 20,
+      "canbus": 0
+    },
+    {
+      "company": "Ag-Wise, Inc.",
+      "country": "US",
+      "sml": 20,
+      "canbus": 6
+    },
+    {
+      "company": "Likwid Asset Management",
+      "country": "US",
+      "sml": 19,
+      "canbus": 0
+    },
+    {
+      "company": "Beckstoffer Vineyards",
+      "country": "US",
+      "sml": 18,
+      "canbus": 3
+    },
+    {
+      "company": "Englehardt Ag Services",
+      "country": "US",
+      "sml": 17,
+      "canbus": 0
+    },
+    {
+      "company": "Lachlan River Almonds",
+      "country": "Australia",
+      "sml": 17,
+      "canbus": 1
+    },
+    {
+      "company": "אחים נעים",
+      "country": "IL",
+      "sml": 17,
+      "canbus": 0
+    },
+    {
+      "company": "Kyalite Pistachios",
+      "country": "Australia",
+      "sml": 16,
+      "canbus": 1
+    },
+    {
+      "company": "Grapery New",
+      "country": "US",
+      "sml": 16,
+      "canbus": 12
+    },
+    {
+      "company": "BFM",
+      "country": "US",
+      "sml": 16,
+      "canbus": 0
+    },
+    {
+      "company": "Taylor Farms - Mega Fresh MX",
+      "country": "MX",
+      "sml": 16,
+      "canbus": 0
+    },
+    {
+      "company": "Automated Harvesting",
+      "country": "US",
+      "sml": 15,
+      "canbus": 0
+    },
+    {
+      "company": "Washington Orchard Management",
+      "country": "US",
+      "sml": 15,
+      "canbus": 0
+    },
+    {
+      "company": "Travaille & Phippen",
+      "country": "US",
+      "sml": 14,
+      "canbus": 0
+    },
+    {
+      "company": "Ron Tadlock Farms",
+      "country": "US",
+      "sml": 14,
+      "canbus": 0
+    },
+    {
+      "company": "Fresno State",
+      "country": "US",
+      "sml": 13,
+      "canbus": 4
+    },
+    {
+      "company": "A Bar Ag",
+      "country": "US",
+      "sml": 13,
+      "canbus": 9
+    },
+    {
+      "company": "גרנות",
+      "country": "IL",
+      "sml": 13,
+      "canbus": 0
+    },
+    {
+      "company": "Antica Napa Valley",
+      "country": "US",
+      "sml": 12,
+      "canbus": 4
+    },
+    {
+      "company": "מהדרין",
+      "country": "IL",
+      "sml": 12,
+      "canbus": 0
+    },
+    {
+      "company": "Stag's Leap Wine Cellars",
+      "country": "US",
+      "sml": 12,
+      "canbus": 1
+    },
+    {
+      "company": "Elk Grove Farming Co",
+      "country": "US",
+      "sml": 12,
+      "canbus": 12
+    },
+    {
+      "company": "Vetter Ranches",
+      "country": "US",
+      "sml": 12,
+      "canbus": 0
+    },
+    {
+      "company": "פירות אלפסי",
+      "country": "IL",
+      "sml": 11,
+      "canbus": 0
+    },
+    {
+      "company": "מרום גולן",
+      "country": "IL",
+      "sml": 10,
+      "canbus": 0
+    },
+    {
+      "company": "בננות החוף",
+      "country": "IL",
+      "sml": 10,
+      "canbus": 0
+    },
+    {
+      "company": "Prize Superfruits",
+      "country": "CL",
+      "sml": 10,
+      "canbus": 0
+    },
+    {
+      "company": "Nichols Farms",
+      "country": "US",
+      "sml": 10,
+      "canbus": 5
+    },
+    {
+      "company": "קיבוץ חולדה",
+      "country": "IL",
+      "sml": 9,
+      "canbus": 0
+    },
+    {
+      "company": "יראון",
+      "country": "IL",
+      "sml": 9,
+      "canbus": 0
+    },
+    {
+      "company": "Dynamic Ag Inc.",
+      "country": "US",
+      "sml": 9,
+      "canbus": 0
+    },
+    {
+      "company": "M.A. Garcia Agrilabor Inc",
+      "country": "US",
+      "sml": 9,
+      "canbus": 1
+    },
+    {
+      "company": "Washington Fruit",
+      "country": "US",
+      "sml": 9,
+      "canbus": 0
+    },
+    {
+      "company": "אייל שורץ",
+      "country": "IL",
+      "sml": 8,
+      "canbus": 0
+    },
+    {
+      "company": "ברעם",
+      "country": "IL",
+      "sml": 8,
+      "canbus": 0
+    },
+    {
+      "company": "אגודת הפלחה",
+      "country": "IL",
+      "sml": 8,
+      "canbus": 0
+    },
+    {
+      "company": "מושבי הנגב",
+      "country": "IL",
+      "sml": 7,
+      "canbus": 0
+    },
+    {
+      "company": "דלתון",
+      "country": "IL",
+      "sml": 7,
+      "canbus": 0
+    },
+    {
+      "company": "Muller Ag",
+      "country": "US",
+      "sml": 6,
+      "canbus": 5
+    },
+    {
+      "company": "Booth Ranches",
+      "country": "US",
+      "sml": 6,
+      "canbus": 5
+    },
+    {
+      "company": "עץ השדה",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "שלמה סונדק",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 3
+    },
+    {
+      "company": "צרפתי עיבודים",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "שחר סלע",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "אלעד אביב",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "קיבוץ מגל",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 1
+    },
+    {
+      "company": "Capay Farms",
+      "country": "US",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "מלכיה",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "בוז'ו - טרקטורים",
+      "country": "IL",
+      "sml": 6,
+      "canbus": 0
+    },
+    {
+      "company": "סעד קבלן",
+      "country": "IL",
+      "sml": 5,
+      "canbus": 0
+    },
+    {
+      "company": "אמיר מנסור קבלן מהדרין",
+      "country": "IL",
+      "sml": 5,
+      "canbus": 0
+    },
+    {
+      "company": "אשר אליהו",
+      "country": "IL",
+      "sml": 5,
+      "canbus": 0
+    },
+    {
+      "company": "אלעד בזק",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "אבי כלפה",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "סאסא",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "אסיפי בר - שקדים",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "ניר דוד",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "קיבוץ גבע",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "Fresh Produce Group",
+      "country": "Australia",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "אמיר ג'אבר",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "פדה",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "שדות ומטעים",
+      "country": "IL",
+      "sml": 4,
+      "canbus": 0
+    },
+    {
+      "company": "קיבוץ גלעד",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "קיבוץ יזרעאל",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "קלו קבלן",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "Capay Valley Ranches",
+      "country": "US",
+      "sml": 3,
+      "canbus": 2
+    },
+    {
+      "company": "קיבוץ אייל",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "ברקן",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 1
+    },
+    {
+      "company": "Kazarian Vineyard",
+      "country": "US",
+      "sml": 3,
+      "canbus": 1
+    },
+    {
+      "company": "(מרדכי חדד (מושב איתן",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "סאלח ברקוביץ",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 1
+    },
+    {
+      "company": "Terra Linda",
+      "country": "US",
+      "sml": 3,
+      "canbus": 3
+    },
+    {
+      "company": "Mackays",
+      "country": "Australia",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "אפיק",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "נוח קבלן",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "הדרי ניצנים",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "בוז'ו - בוצרות",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "מטע מרים",
+      "country": "IL",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "Berberian Ranches",
+      "country": "US",
+      "sml": 3,
+      "canbus": 0
+    },
+    {
+      "company": "גרנות עיבודים",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "פוואז קבלן",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 1
+    },
+    {
+      "company": "גיורא אלחדד - קבלן ברקן",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "קיבוץ מצר",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "Eureka Farms",
+      "country": "Australia",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "בית ניר-קיבוץ",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "רונן קבלן",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "יקב קסטל",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "משק ישי",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 1
+    },
+    {
+      "company": "Riparian Capital",
+      "country": "Australia",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "גמלא",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "אבקסיס קבלן גרנות",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "ראסמי קבלן",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "מבוא חורון",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "יואב חדד",
+      "country": "IL",
+      "sml": 2,
+      "canbus": 0
+    },
+    {
+      "company": "גבעות החורש",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "כפר סאלד",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "תל יצחק - עבודים",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "רם חנן קבלן",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אבו עאמר עאמר קבלן",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אבי גולדשטיין",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "מוחמד אלעול - קבלן ניצנים",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "רודי פרקר קבלן גרנות",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "Fieldin Techs",
+      "country": "US",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "עזאם קבלן ניצנים",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אלירון שמיר קבלן צרפתי",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אשכנזי שירותי חקלאות בע\"מ",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "איברהים קבלן",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אליעזר ואוהד נויברט",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "חבל יתיר",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "אחמד שירותי חקלאות - קבלן",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "מגד קבלן מהדרין דרום",
+      "country": "IL",
+      "sml": 1,
+      "canbus": 0
+    },
+    {
+      "company": "Riverina Nut Company",
+      "country": "Australia",
+      "sml": 1,
+      "canbus": 0
+    }
+  ]
+}

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAN Bus Adoption — Weekly KPI Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-alt: #22252f;
+    --border: #2d3040;
+    --text: #e4e6ed;
+    --text-secondary: #8b8fa3;
+    --text-tertiary: #5d6175;
+    --accent: #3b82f6;
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.1);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.1);
+    --amber: #f59e0b;
+    --amber-bg: rgba(245,158,11,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+  header .subtitle { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+  header .updated { color: var(--text-tertiary); font-size: 12px; text-align: right; }
+
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .kpi-card .value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .kpi-card .value .of-total {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0;
+  }
+  .kpi-card .label {
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+  }
+  .kpi-card .kpi-bar-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .kpi-card .kpi-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s;
+  }
+  .kpi-card .delta {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .delta.up { color: var(--green); background: var(--green-bg); }
+  .delta.down { color: var(--red); background: var(--red-bg); }
+  .delta.flat { color: var(--amber); background: var(--amber-bg); }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 800px) { .charts-row { grid-template-columns: 1fr; } }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .chart-card h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-secondary);
+  }
+
+  .table-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .table-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .table-header-bar h3 { font-size: 14px; font-weight: 600; }
+  .filter-pills { display: flex; gap: 6px; }
+  .pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .pill:hover { border-color: var(--text-secondary); color: var(--text); }
+  .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .search-box {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    width: 200px;
+  }
+  .search-box:focus { border-color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    text-align: left;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  thead th:hover { color: var(--text); }
+  thead th.sorted { color: var(--accent); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-alt); }
+  td { padding: 9px 16px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .adoption-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .adoption-bar .bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .adoption-bar .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
+  }
+  .adoption-bar .bar-label {
+    font-size: 12px;
+    font-weight: 600;
+    width: 48px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 11px;
+    padding: 20px 0;
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-tertiary);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>CAN Bus Adoption — Weekly KPI</h1>
+    <div class="subtitle">SML device fleet with CAN bus connectivity across active companies</div>
+  </div>
+  <div class="updated" id="lastUpdated"></div>
+</header>
+
+<div class="kpi-strip" id="kpiStrip"></div>
+
+<div class="charts-row">
+  <div class="chart-card">
+    <h3>Weekly Adoption Trend</h3>
+    <canvas id="trendChart" height="80"></canvas>
+  </div>
+  <div class="chart-card">
+    <h3>Fleet Breakdown (Current)</h3>
+    <canvas id="pieChart" height="160"></canvas>
+  </div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-card">
+    <h3>Total SML & CAN Bus Devices Over Time</h3>
+    <canvas id="devicesChart" height="80"></canvas>
+  </div>
+  <div class="chart-card">
+    <h3>Companies with CAN Bus Over Time</h3>
+    <canvas id="companiesChart" height="160"></canvas>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="table-header-bar">
+    <h3>Company Breakdown</h3>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="filter-pills" id="canbusFilter">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="with">With CAN Bus</button>
+        <button class="pill" data-filter="without">No CAN Bus</button>
+      </div>
+      <div class="filter-pills" id="countryFilter"></div>
+      <input type="text" class="search-box" placeholder="Search company..." id="searchBox">
+    </div>
+  </div>
+  <div style="overflow-x:auto; max-height: 600px; overflow-y: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th data-col="rank">#</th>
+          <th data-col="company">Company</th>
+          <th data-col="country">Country</th>
+          <th data-col="sml" style="text-align:right">SML Devices</th>
+          <th data-col="canbus" style="text-align:right">With CAN Bus</th>
+          <th data-col="pct" style="text-align:right">Adoption</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  CAN Bus KPI Dashboard &middot; Auto-generated weekly &middot; Data from BigQuery
+</div>
+
+<script>
+const ALL_DATA = __DASHBOARD_DATA__;
+
+if (!ALL_DATA.length) {
+  document.querySelector('.kpi-strip').innerHTML = '<div class="no-data">No data yet. Run collect.py to populate.</div>';
+}
+
+const latest = ALL_DATA[ALL_DATA.length - 1] || null;
+const prev = ALL_DATA.length > 1 ? ALL_DATA[ALL_DATA.length - 2] : null;
+
+// --- Last updated ---
+if (latest) {
+  document.getElementById('lastUpdated').innerHTML =
+    `Last updated<br><strong>${new Date(latest.collected_at).toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'short', day:'numeric'})}</strong>`;
+}
+
+// --- KPI cards ---
+function delta(current, previous, { suffix = '', invert = false, isPercentage = false } = {}) {
+  if (previous == null) return '';
+  const diff = current - previous;
+  if (diff === 0) return '<span class="delta flat">No change</span>';
+  const arrow = diff > 0 ? '↑' : '↓';
+  const cls = (diff > 0) !== invert ? 'up' : 'down';
+  if (isPercentage) {
+    return `<span class="delta ${cls}">${arrow} ${Math.abs(diff).toFixed(1)} pp</span>`;
+  }
+  const relPct = previous !== 0 ? ((diff / previous) * 100).toFixed(1) : '—';
+  return `<span class="delta ${cls}">${arrow} ${Math.abs(diff).toLocaleString()}${suffix} (${diff > 0 ? '+' : ''}${relPct}%)</span>`;
+}
+
+if (latest) {
+  const s = latest.summary;
+  const p = prev ? prev.summary : null;
+  const companyPct = ((s.companies_with_canbus / s.total_companies) * 100).toFixed(1);
+  const prevCompanyPct = p ? ((p.companies_with_canbus / p.total_companies) * 100).toFixed(1) : null;
+  const devicePct = ((s.total_canbus / s.total_sml) * 100).toFixed(1);
+  const prevDevicePct = p ? ((p.total_canbus / p.total_sml) * 100).toFixed(1) : null;
+
+  document.getElementById('kpiStrip').innerHTML = `
+    <div class="kpi-card">
+      <div class="value">${s.companies_with_canbus} <span class="of-total">/ ${s.total_companies}</span></div>
+      <div class="label">Companies with CAN Bus</div>
+      <div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:${companyPct}%;background:var(--green)"></div></div>
+      ${delta(parseFloat(companyPct), prevCompanyPct ? parseFloat(prevCompanyPct) : null, { isPercentage: true })}
+    </div>
+    <div class="kpi-card">
+      <div class="value">${s.total_canbus.toLocaleString()} <span class="of-total">/ ${s.total_sml.toLocaleString()}</span></div>
+      <div class="label">Devices with CAN Bus</div>
+      <div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:${devicePct}%;background:var(--accent)"></div></div>
+      ${delta(parseFloat(devicePct), prevDevicePct ? parseFloat(prevDevicePct) : null, { isPercentage: true })}
+    </div>
+    <div class="kpi-card">
+      <div class="value" style="color:var(--green)">${s.adoption_pct}%</div>
+      <div class="label">Adoption Rate</div>
+      <div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:${s.adoption_pct}%;background:var(--green)"></div></div>
+      ${delta(s.adoption_pct, p?.adoption_pct, { isPercentage: true })}
+    </div>
+  `;
+}
+
+// --- Chart.js global config ---
+Chart.defaults.color = '#8b8fa3';
+Chart.defaults.borderColor = '#2d3040';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+Chart.defaults.font.size = 11;
+
+// --- Trend chart (adoption %) ---
+if (ALL_DATA.length) {
+  const labels = ALL_DATA.map(d => d.date);
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Adoption %',
+        data: ALL_DATA.map(d => d.summary.adoption_pct),
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59,130,246,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#3b82f6',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: v => v + '%' }, grid: { color: '#1e2130' } },
+        x: { grid: { display: false } },
+      },
+    },
+  });
+}
+
+// --- Pie chart ---
+if (latest) {
+  const s = latest.summary;
+  new Chart(document.getElementById('pieChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['With CAN Bus', 'Without CAN Bus'],
+      datasets: [{
+        data: [s.total_canbus, s.total_sml - s.total_canbus],
+        backgroundColor: ['#22c55e', '#2d3040'],
+        borderColor: '#1a1d27',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyleWidth: 10 } },
+      },
+    },
+  });
+}
+
+// --- Devices over time ---
+if (ALL_DATA.length) {
+  new Chart(document.getElementById('devicesChart'), {
+    type: 'bar',
+    data: {
+      labels: ALL_DATA.map(d => d.date),
+      datasets: [
+        {
+          label: 'SML without CAN Bus',
+          data: ALL_DATA.map(d => d.summary.total_sml - d.summary.total_canbus),
+          backgroundColor: '#2d3040',
+          borderRadius: 3,
+        },
+        {
+          label: 'SML with CAN Bus',
+          data: ALL_DATA.map(d => d.summary.total_canbus),
+          backgroundColor: '#22c55e',
+          borderRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyleWidth: 10 } } },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: { stacked: true, grid: { color: '#1e2130' } },
+      },
+    },
+  });
+}
+
+// --- Companies with CAN Bus over time ---
+if (ALL_DATA.length) {
+  new Chart(document.getElementById('companiesChart'), {
+    type: 'line',
+    data: {
+      labels: ALL_DATA.map(d => d.date),
+      datasets: [{
+        label: 'Companies w/ CAN Bus',
+        data: ALL_DATA.map(d => d.summary.companies_with_canbus),
+        borderColor: '#22c55e',
+        backgroundColor: 'rgba(34,197,94,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#22c55e',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#1e2130' } },
+        x: { grid: { display: false } },
+      },
+    },
+  });
+}
+
+// --- Company table ---
+let currentFilter = 'all';
+let selectedCountries = new Set(['US', 'Australia']);
+let currentSearch = '';
+let sortCol = 'sml';
+let sortAsc = false;
+
+// Build country filter pills dynamically (multi-select)
+if (latest) {
+  const countries = [...new Set(latest.companies.map(r => r.country || ''))].filter(Boolean).sort();
+  const countryContainer = document.getElementById('countryFilter');
+
+  function renderCountryPills() {
+    const isAll = selectedCountries.size === countries.length;
+    countryContainer.innerHTML =
+      `<button class="pill ${isAll ? 'active' : ''}" data-country="all">All Regions</button>`
+      + countries.map(c =>
+        `<button class="pill ${selectedCountries.has(c) ? 'active' : ''}" data-country="${c}">${c}</button>`
+      ).join('');
+
+    countryContainer.querySelectorAll('.pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.dataset.country;
+        if (val === 'all') {
+          if (selectedCountries.size === countries.length) selectedCountries.clear();
+          else selectedCountries = new Set(countries);
+        } else {
+          if (selectedCountries.has(val)) selectedCountries.delete(val);
+          else selectedCountries.add(val);
+        }
+        renderCountryPills();
+        renderTable();
+      });
+    });
+  }
+  renderCountryPills();
+}
+
+function renderTable() {
+  if (!latest) return;
+  let rows = latest.companies.slice();
+
+  if (currentFilter === 'with') rows = rows.filter(r => r.canbus > 0);
+  else if (currentFilter === 'without') rows = rows.filter(r => r.canbus === 0);
+
+  if (selectedCountries.size > 0) rows = rows.filter(r => selectedCountries.has(r.country));
+
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    rows = rows.filter(r => r.company.toLowerCase().includes(q));
+  }
+
+  rows.sort((a, b) => {
+    let va, vb;
+    if (sortCol === 'company') { va = a.company.toLowerCase(); vb = b.company.toLowerCase(); }
+    else if (sortCol === 'country') { va = (a.country || '').toLowerCase(); vb = (b.country || '').toLowerCase(); }
+    else if (sortCol === 'sml') { va = a.sml; vb = b.sml; }
+    else if (sortCol === 'canbus') { va = a.canbus; vb = b.canbus; }
+    else if (sortCol === 'pct') { va = a.sml ? a.canbus / a.sml : 0; vb = b.sml ? b.canbus / b.sml : 0; }
+    else { va = 0; vb = 0; }
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.col === sortCol);
+  });
+
+  const COUNTRY_FLAGS = { 'US': '🇺🇸', 'IL': '🇮🇱', 'Australia': '🇦🇺', 'MX': '🇲🇽', 'AR': '🇦🇷', 'IT': '🇮🇹', 'ZA': '🇿🇦', 'CL': '🇨🇱' };
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = rows.map((r, i) => {
+    const pct = r.sml > 0 ? (r.canbus / r.sml * 100).toFixed(1) : '0.0';
+    const barColor = pct >= 50 ? 'var(--green)' : pct > 0 ? 'var(--accent)' : 'var(--border)';
+    const flag = COUNTRY_FLAGS[r.country] || '';
+    return `<tr>
+      <td class="num" style="color:var(--text-tertiary)">${i + 1}</td>
+      <td>${r.company}</td>
+      <td>${flag} ${r.country || ''}</td>
+      <td class="num">${r.sml.toLocaleString()}</td>
+      <td class="num">${r.canbus.toLocaleString()}</td>
+      <td>
+        <div class="adoption-bar">
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+          <div class="bar-label">${pct}%</div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+document.querySelectorAll('#canbusFilter .pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#canbusFilter .pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderTable();
+  });
+});
+
+document.getElementById('searchBox').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  renderTable();
+});
+
+document.querySelectorAll('thead th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    if (sortCol === th.dataset.col) sortAsc = !sortAsc;
+    else { sortCol = th.dataset.col; sortAsc = th.dataset.col === 'company' || th.dataset.col === 'country'; }
+    renderTable();
+  });
+});
+
+renderTable();
+</script>
+</body>
+</html>
