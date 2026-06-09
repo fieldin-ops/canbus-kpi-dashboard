@@ -54,18 +54,25 @@ ORDER BY total_sml DESC
 """
 
 
+BQ_PROJECT = "poodle-359607"
+GCP_ACCOUNT = "tyizhak@fieldintech.com"
+
+
 def run_query() -> list[dict]:
     """Execute the BigQuery query via bq CLI and return parsed rows."""
+    env = {**os.environ, "CLOUDSDK_CORE_ACCOUNT": GCP_ACCOUNT, "CLOUDSDK_CORE_PROJECT": BQ_PROJECT}
     result = subprocess.run(
         [
             "bq", "query",
             "--use_legacy_sql=false",
             "--format=prettyjson",
             "--max_rows=1000",
+            f"--project_id={BQ_PROJECT}",
             BQ_QUERY,
         ],
         capture_output=True,
         text=True,
+        env=env,
     )
     if result.returncode != 0:
         print(f"BigQuery error:\n{result.stderr}", file=sys.stderr)
@@ -151,8 +158,13 @@ def build_dashboard(snapshots: list[dict]) -> None:
 NOTIFY_EMAIL = os.environ.get("KPI_NOTIFY_EMAIL", "tyizhak@fieldintech.com")
 
 
+GH_CLI = "/tmp/gh/gh_2.74.0_macOS_arm64/bin/gh"
+
+
 def publish() -> None:
     """Commit updated data and dashboard, push to GitHub Pages."""
+    if os.path.exists(GH_CLI):
+        subprocess.run([GH_CLI, "auth", "setup-git"], capture_output=True, text=True)
     cmds = [
         ["git", "-C", str(PROJECT_ROOT), "add", "-A"],
         ["git", "-C", str(PROJECT_ROOT), "commit", "-m", f"Weekly KPI update {datetime.now(timezone.utc).strftime('%Y-%m-%d')}"],
